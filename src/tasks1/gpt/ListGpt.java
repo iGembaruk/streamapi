@@ -25,7 +25,7 @@ public class ListGpt {
         System.out.println(task13ClassPerson1.listFilterAgeSelectName(personList));
 
         System.out.println(listGpt.listNamesIsStartsA(listStr2));
-        System.out.println(listGpt.multiplicationAllElementsIsListInteger(listNumbersA));
+        System.out.println(listGpt.countDistinctListNumbers(listNumbersB));
     }
 
     //1. Cоздать список строк и найти самую длинную строку
@@ -124,6 +124,19 @@ public class ListGpt {
     public int multiplicationAllElementsIsListInteger(List<Integer> listInteger){
         return listInteger.stream()
                 .reduce(1, (a, b) -> a * b);
+    }
+    //15. кол-во положительных чисел
+    public int countPositiveNumbers(List<Integer> listInteger){
+        return (int) listInteger.stream()
+                .mapToInt(Integer::intValue)
+                .filter(x -> x > 0)
+                .count();
+    }
+    //16. Посчитать кол-во уникальных элементов
+    public int countDistinctListNumbers(List<Integer> listInteger){
+        return (int) listInteger.stream()
+                .distinct()
+                .count();
     }
 
 }
