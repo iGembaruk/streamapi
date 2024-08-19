@@ -1,15 +1,13 @@
 package tasks1.gpt;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ListGpt {
     public static void main(String[] args) {
         ListGpt listGpt = new ListGpt();
         List<String> listStr = Arrays.asList("a", "ab", "b", "abc", "1", "2", "100");
-        List<String> listStr2 = Arrays.asList("abricos", "Aaaa", "aab", "baa", "banana", "abcd", "ananas");
+        List<String> listStr2 = Arrays.asList("abricos", "Aaaa", "aab", "baa", "banana", "abcd", "ananas", "");
         List<String> listStrZero = Arrays.asList();
         List<Integer> listNumbersA = Arrays.asList(1, 2, -1, 3, 4 ,3);
         List<Integer> listNumbersB = Arrays.asList(1, 2, -1, 3, 4 ,3 , 0, -2, -7, 60, 1000, 35, -44, 11, 1, 19);
@@ -24,8 +22,8 @@ public class ListGpt {
         List<Task13ClassPerson> personList = Arrays.asList(task13ClassPerson, task13ClassPerson1, task13ClassPerson2, task13ClassPerson3, task13ClassPerson5, task13ClassPerson4);
         System.out.println(task13ClassPerson1.listFilterAgeSelectName(personList));
 
-        System.out.println(listGpt.listNamesIsStartsA(listStr2));
-        System.out.println(listGpt.countDistinctListNumbers(listNumbersB));
+        System.out.println(listGpt.groupCountChar(listStr2));
+        System.out.println(listGpt.inputNumbersIsSum2Numbers(listNumbersB, 2));
     }
 
     //1. Cоздать список строк и найти самую длинную строку
@@ -67,6 +65,30 @@ public class ListGpt {
         return listStringName.stream()
                 .filter(x -> x.startsWith("A"))
                 .collect(Collectors.toList());
+    }
+
+    //18. Перевернуть строки в листе
+    public List<String> reverseStringInList(List<String> stringList){
+        return stringList.stream()
+                .map(str -> new StringBuilder(str).reverse().toString())
+                .collect(Collectors.toList());
+    }
+    //19. Удалить пустые строки
+    public List<String> deleteIsEmptyListString(List<String> stringList){
+        return  stringList.stream()
+                .filter(x -> !x.isEmpty())
+                .collect(Collectors.toList());
+    }
+    // 27.Cписок строк соединить в одну чрз ", "
+    public String joinIsListString(List<String> stringList){
+        return stringList.stream()
+                .collect(Collectors.joining(", "));
+    }
+    //28. Cоздать список строк и сгруппировать их по длине
+    public Map<Integer, List<String>> groupCountChar(List<String> stringList){
+        return stringList.stream()
+                .collect(Collectors.groupingBy(x -> x.length()));
+
     }
 
     //********************Числа****************************8
@@ -137,6 +159,49 @@ public class ListGpt {
         return (int) listInteger.stream()
                 .distinct()
                 .count();
+    }
+    //17. удвоить каждое число
+    public List<Integer> multiplicationOn2numbersElementsListInteger(List<Integer> listInteger){
+        return listInteger.stream()
+                .map(x -> x * 2)
+                .collect(Collectors.toList());
+    }
+    //22.Числа, которые делятся на 3
+    public List<Integer> numbersListDivisibleOn3(List<Integer> integerList){
+        return integerList.stream()
+                .filter(x -> x % 3 == 0)
+                .collect(Collectors.toList());
+    }
+    //23. Диапозон с 10 до 100
+    public List<Integer> diapozonStart10Final100(List<Integer> integerList){
+        return integerList.stream()
+                .filter(x -> x >= 10 && x <=100)
+                .collect(Collectors.toList());
+    }
+    //25 Разбить числа на четные и нечетные
+    public List<Integer> listEvenNumbers(List<Integer>integerList){
+        return integerList.stream()
+                .filter(x -> x % 2 == 0)
+                .collect(Collectors.toList());
+    }
+    public List<Integer> listNoEvenNumbers(List<Integer>integerList){
+        return integerList.stream()
+                .filter(x -> x % 2 != 0)
+                .collect(Collectors.toList());
+    }
+    //26.Первая пара чисел, сумма которых равна заданному числу
+    public List<Integer> inputNumbersIsSum2Numbers(List<Integer> integerList, int sumNumbers){
+        List<Integer> listTwoElements = new ArrayList<>();
+        for(int i = 0; i <integerList.size(); i++){
+            for(int j = i + 1; j < integerList.size(); j++){
+                if(integerList.get(i) + integerList.get(j) == sumNumbers){
+                    listTwoElements.add(integerList.get(i));
+                    listTwoElements.add(integerList.get(j));
+                    return listTwoElements;
+                }
+            }
+        }
+        return listTwoElements;
     }
 
 }
